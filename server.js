@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import sequelize from "./src/config/database.js";
 import "./src/models/index.js";
 import clientRoutes from "./src/routes/Client.routes.js";
+import projectRoutes from "./src/routes/Project.routes.js";
+
+
 
 dotenv.config();
 
@@ -10,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/clients", clientRoutes);
-
+app.use("/api/projects", projectRoutes);
 try {
   await sequelize.authenticate();
   console.log("Database Connected Successfully");
