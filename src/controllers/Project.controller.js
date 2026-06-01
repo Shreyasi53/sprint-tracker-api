@@ -1,6 +1,7 @@
 import {
   createProjectService,
   getProjectSprintsService,
+  getProjectHealthService,
 } from "../services/Project.service.js";
 
 export const createProject = async (req, res) => {
@@ -33,6 +34,31 @@ export const getProjectSprints = async (req, res) => {
     res.status(200).json({
       success: true,
       data: project,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getProjectHealth = async (req, res) => {
+  try {
+    const health = await getProjectHealthService(
+      req.params.id
+    );
+
+    if (!health) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: health,
     });
   } catch (error) {
     res.status(500).json({
