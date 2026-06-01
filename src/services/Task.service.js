@@ -7,9 +7,9 @@ export const updateTaskStatusService = async (taskId, status) => {
   const flow = ["TODO", "IN_PROGRESS", "REVIEW", "DONE"];
   const currentIndex = flow.indexOf(task.status);
   const newIndex = flow.indexOf(status);
-  if (newIndex !== currentIndex + 1){
+  if (newIndex !== currentIndex + 1) {
     throw new Error(
-      `Invalid status transition from ${task.status} to ${status}`
+      `Invalid status transition from ${task.status} to ${status}`,
     );
   }
 
@@ -26,11 +26,23 @@ export const assignEngineerToTaskService = async (taskId, engineerId) => {
   if (!engineer) {
     throw new Error("Engineer not found");
   }
-  if(!engineer.isAvailable){
+  if (!engineer.isAvailable) {
     throw new Error("Engineer is not available");
   }
 
   task.engineerId = engineerId;
   await task.save();
   return task;
+};
+
+export const getFilteredTasksService = async (status, priority, sprintId) => {
+  const where = {};
+
+  if (status) where.status = status;
+  if (priority) where.priority = priority;
+  if (sprintId) where.sprintId = sprintId;
+
+  return await Task.findAll({
+    where,
+  });
 };
