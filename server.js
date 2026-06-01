@@ -7,9 +7,9 @@ import clientRoutes from "./src/routes/Client.routes.js";
 dotenv.config();
 
 const app = express();
-app.use(clientRoutes);
-
 app.use(express.json());
+
+app.use("/api/clients", clientRoutes);
 
 try {
   await sequelize.authenticate();
