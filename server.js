@@ -5,7 +5,7 @@ import "./src/models/index.js";
 import clientRoutes from "./src/routes/Client.routes.js";
 import projectRoutes from "./src/routes/Project.routes.js";
 import sprintRoutes from "./src/routes/Sprint.routes.js";
-
+import taskRoutes from "./src/routes/Task.routes.js";
 
 dotenv.config();
 
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use("/api/clients", clientRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/sprints", sprintRoutes);
+app.use("/api/tasks", taskRoutes);
 
 try {
   await sequelize.authenticate();
