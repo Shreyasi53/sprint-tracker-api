@@ -4,9 +4,12 @@ import {
   getProjectSprints,
 } from "../controllers/Project.controller.js";
 
+import { validate } from "../middleware/validate.js";
+import { projectSchema } from "../validations/Project.validation.js";
+
 const router = express.Router();
 
-router.post("/", createProject);
+router.post("/", validate(projectSchema), createProject);
 
 router.get("/:id/sprints", getProjectSprints);
 

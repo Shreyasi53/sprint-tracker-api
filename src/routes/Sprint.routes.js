@@ -4,9 +4,12 @@ import {
   addTaskToSprint,
 } from "../controllers/Sprint.controller.js";
 
+import { validate } from "../middleware/validate.js";
+import { sprintSchema } from "../validations/Sprint.validation.js";
+
 const router = express.Router();
 
-router.post("/", createSprint);
+router.post("/", validate(sprintSchema), createSprint);
 
 router.post("/:id/tasks", addTaskToSprint);
 

@@ -7,9 +7,13 @@ import {
   deleteClient,
 } from "../controllers/Client.controller.js";
 
+import { validate } from "../middleware/validate.js";
+import { clientSchema } from "../validations/Client.validation.js";
+
 const router = express.Router();
 
-router.post("/", createClient);
+router.post("/", validate(clientSchema), createClient);
+
 router.get("/", getAllClients);
 router.get("/:id", getClientById);
 router.put("/:id", updateClient);
