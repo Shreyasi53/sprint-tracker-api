@@ -6,7 +6,6 @@ import clientRoutes from "./src/routes/Client.routes.js";
 import projectRoutes from "./src/routes/Project.routes.js";
 import sprintRoutes from "./src/routes/Sprint.routes.js";
 import taskRoutes from "./src/routes/Task.routes.js";
-
 dotenv.config();
 
 const app = express();

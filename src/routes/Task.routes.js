@@ -1,8 +1,8 @@
 import express from "express";
-import { updateTaskStatus } from "../controllers/Task.controller.js";
+import { updateTaskStatus, assignEngineerToTask } from "../controllers/Task.controller.js";
 
 const router = express.Router();
-
 router.put("/:id/status", updateTaskStatus);
+router.put("/:id/assign/:engineerId", assignEngineerToTask);
 
 export default router;
