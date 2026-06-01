@@ -8,7 +8,7 @@ import {
 
 export const createClient = async (req, res) => {
   try {
-    //console.log(req.body); 
+    //console.log(req.body);
     const client = await createClientService(req.body);
 
     res.status(201).json({
@@ -25,11 +25,17 @@ export const createClient = async (req, res) => {
 
 export const getAllClients = async (req, res) => {
   try {
-    const clients = await getAllClientsService();
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    const clients = await getAllClientsService(page, limit);
 
     res.status(200).json({
       success: true,
-      data: clients,
+      totalClients: clients.count,
+      currentPage: page,
+      totalPages: Math.ceil(clients.count / limit),
+      data: clients.rows,
     });
   } catch (error) {
     res.status(500).json({
@@ -64,10 +70,7 @@ export const getClientById = async (req, res) => {
 
 export const updateClient = async (req, res) => {
   try {
-    const client = await updateClientService(
-      req.params.id,
-      req.body
-    );
+    const client = await updateClientService(req.params.id, req.body);
 
     if (!client) {
       return res.status(404).json({

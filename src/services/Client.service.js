@@ -4,8 +4,13 @@ export const createClientService = async (data) => {
   return await Client.create(data);
 };
 
-export const getAllClientsService = async () => {
-  return await Client.findAll();
+export const getAllClientsService = async (page, limit) => {
+  const offset = (page - 1) * limit;
+  const clients = await Client.findAndCountAll({
+    limit,
+    offset,
+  });
+  return clients;
 };
 
 export const getClientByIdService = async (id) => {
