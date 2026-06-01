@@ -6,6 +6,7 @@ import clientRoutes from "./src/routes/Client.routes.js";
 import projectRoutes from "./src/routes/Project.routes.js";
 import sprintRoutes from "./src/routes/Sprint.routes.js";
 import taskRoutes from "./src/routes/Task.routes.js";
+import engineerRoutes from "./src/routes/Engineer.routes.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use("/api/clients", clientRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/sprints", sprintRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/engineers", engineerRoutes);
 
 try {
   await sequelize.authenticate();
