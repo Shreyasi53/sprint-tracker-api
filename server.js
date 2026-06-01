@@ -6,10 +6,12 @@ import clientRoutes from "./src/routes/Client.routes.js";
 import projectRoutes from "./src/routes/Project.routes.js";
 import sprintRoutes from "./src/routes/Sprint.routes.js";
 import taskRoutes from "./src/routes/Task.routes.js";
+import { errorHandler } from "./src/middleware/errorHandler.js";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(errorHandler);
 
 app.use("/api/clients", clientRoutes);
 app.use("/api/projects", projectRoutes);
