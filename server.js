@@ -12,13 +12,13 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(errorHandler);
 
 app.use("/api/clients", clientRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/sprints", sprintRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/engineers", engineerRoutes);
+app.use(errorHandler);
 
 try {
   await sequelize.authenticate();
